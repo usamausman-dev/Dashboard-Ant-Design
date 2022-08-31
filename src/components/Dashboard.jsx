@@ -1,81 +1,88 @@
-import React from 'react'
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { UploadOutlined, UserOutlined, VideoCameraOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
-import FilePath from './FilePath';
-import ContentFile from './ContentFile';
-import HeaderNav from './HeaderNav';
-import Foot from './Foot';
-
-const { Sider } = Layout;
-
-//Number of Navs
-// const items1 = ['1', '2', '3', '4'].map((key) => ({
-//     key,
-//     label: `nav ${key}`,
-// }));
-
-
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
-    const key = String(index + 1);
-    return {
-        key: `sub${key}`,
-        icon: React.createElement(icon),
-        label: `subnav ${key}`,
-        children: new Array(4).fill(null).map((_, j) => {
-            const subKey = index * 4 + j + 1;
-            return {
-                key: subKey,
-                label: `option${subKey}`,
-            };
-        }),
-    };
-});
+import Foot from './Foot'
+import React, { useState } from 'react';
+import LogoImg from '../logo.png'
 
 
 
-
-
-
+const { Header, Sider, Content } = Layout;
 
 function Dashboard() {
+    const [collapsed, setCollapsed] = useState(false);
+    const [selectedMenuItem, setSelectedMenuItem] = useState('item1');
+
+
+    const componentsSwtich = (key) => {
+        switch (key) {
+            case 'item1':
+                return (<h1>item1</h1>);
+            case 'item2':
+                return (<h1>item2</h1>);
+            case 'item3':
+                return (<h3>item3</h3>);
+            default:
+                break;
+        }
+    };
+
     return (
         <Layout>
-            <HeaderNav />
+            <Sider trigger={null} collapsible collapsed={collapsed}>
+                <div className="logo"
+                    onClick={() => setCollapsed(!collapsed)}
+                    style={{ height: '50px', margin: '16px', backgroundImage: `url(${LogoImg})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }} />
+                <Menu
+                    theme="dark"
+                    mode="inline"
+                    selectedKeys={selectedMenuItem}
+                    onClick={(e) => setSelectedMenuItem(e.key)}
+                >
 
-            <Layout>
-                <Sider width={250} className="site-layout-background">
-                    <Menu
-                        mode="inline"
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
-                        style={{
-                            height: '100%',
-                            borderRight: 0,
-                        }}
-                        items={items2}
+                    <Menu.Item key="item1" icon={<UploadOutlined />}>
+                        UploadOutlined
+                    </Menu.Item>
+                    <Menu.Item key="item2" icon={<UserOutlined />}>
+                        UserOutlined
+                    </Menu.Item>
+                    <Menu.Item key="item3" icon={<VideoCameraOutlined />}>
+                        VideoCameraOutlined
+                    </Menu.Item>
+
+                </Menu>
+            </Sider>
+
+
+            <Layout className="site-layout">
+                <Header className="site-layout-background">
+
+                    {/* {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                        className: 'trigger',
+                        onClick: () => setCollapsed(!collapsed),
+                    })} */}
+
+                    <LogoutOutlined style={{ fontSize: '1.5em', float: 'right', marginTop: '20px' }}
+                        onClick={() => alert('chal raha hun!!')}
                     />
-                </Sider>
+                </Header>
 
-
-
-                <Layout
+                <Content
+                    className="site-layout-background"
                     style={{
-                        padding: '0 24px 24px',
+                        margin: '24px 16px',
+                        padding: 24,
+                        minHeight: 280,
+                        height: '76.5vh'
                     }}
                 >
-                    <FilePath />
 
-                    <ContentFile />
+                    {componentsSwtich(selectedMenuItem)}
 
-
-
-                </Layout>
+                </Content>
+                <Foot />
             </Layout>
 
-            <Foot />
-
-
-        </Layout>
+        </Layout >
     )
 }
 
