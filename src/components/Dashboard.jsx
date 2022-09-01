@@ -1,10 +1,7 @@
-import { UploadOutlined, UserOutlined, VideoCameraOutlined, LogoutOutlined } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
+import { UploadOutlined, UserOutlined, VideoCameraOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { Layout, Menu, Avatar } from 'antd';
 import Foot from './Foot'
 import React, { useState } from 'react';
-import LogoImg from '../logo.png'
-
-
 
 const { Header, Sider, Content } = Layout;
 
@@ -30,8 +27,14 @@ function Dashboard() {
         <Layout>
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo"
-                    onClick={() => setCollapsed(!collapsed)}
-                    style={{ height: '50px', margin: '16px', backgroundImage: `url(${LogoImg})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }} />
+                    // onClick={() => setCollapsed(!collapsed)}
+                    style={{ height: '50px', margin: '16px' }}
+                >
+                    <Avatar size="large" icon={<UserOutlined />} />
+                    <span style={{ color: 'white', fontSize: '1.4em', margin: '0 15px', fontWeight: '600', display: (collapsed ? 'none' : 'inline-block') }}>React</span>
+
+
+                </div>
                 <Menu
                     theme="dark"
                     mode="inline"
@@ -56,10 +59,10 @@ function Dashboard() {
             <Layout className="site-layout">
                 <Header className="site-layout-background">
 
-                    {/* {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
                         onClick: () => setCollapsed(!collapsed),
-                    })} */}
+                    })}
 
                     <LogoutOutlined style={{ fontSize: '1.5em', float: 'right', marginTop: '20px' }}
                         onClick={() => alert('chal raha hun!!')}
