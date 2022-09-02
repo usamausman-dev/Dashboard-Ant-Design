@@ -1,6 +1,7 @@
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, LogoutOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Layout, Menu, Avatar } from 'antd';
-import Foot from './Foot'
+// import Foot from './Foot'
+import Users from '../pages/Users';
 import React, { useState } from 'react';
 
 const { Header, Sider, Content } = Layout;
@@ -13,7 +14,7 @@ function Dashboard() {
     const componentsSwtich = (key) => {
         switch (key) {
             case 'item1':
-                return (<h1>item1</h1>);
+                return (<Users />);
             case 'item2':
                 return (<h1>item2</h1>);
             case 'item3':
@@ -75,14 +76,14 @@ function Dashboard() {
                         margin: '24px 16px',
                         padding: 24,
                         minHeight: 280,
-                        height: '76.5vh'
+                        height: '85.5vh'
                     }}
                 >
 
                     {componentsSwtich(selectedMenuItem)}
 
                 </Content>
-                <Foot />
+                {/* <Foot /> */}
             </Layout>
 
         </Layout >
